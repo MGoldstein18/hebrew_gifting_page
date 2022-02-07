@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html dir="rtl" lang="he">
-  <title>Gift Voucher Payment</title>
+  <title>תשלום</title>
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -150,8 +150,6 @@
 
         }
         if (occasion === 'birthday') {
-          document.getElementById('messageInput').placeholder = language === 'e' ?
-            'Happy Birthday!': 'יום הולדת שמח!';
           document.getElementById('pic#0').src =
             'https://images.unsplash.com/photo-1605104602628-4ef9ec5c1da4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=776&q=80';
           document.getElementById('pic#1').src =
@@ -163,7 +161,6 @@
         }
 
         if (occasion === 'thank') {
-          document.getElementById('messageInput').placeholder = language === 'e' ? 'Thank you!': 'תודה רבה!';
           document.getElementById('pic#0').src =
             'https://images.unsplash.com/photo-1586810165511-781c734b6b0c?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjV8fHRoYW5rJTIweW91fGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60';
           document.getElementById('pic#1').src =
@@ -175,7 +172,6 @@
         }
 
         if (occasion === 'well') {
-          document.getElementById('messageInput').placeholder = language === 'e' ? 'Well Done!': 'כל הכבוד';
           document.getElementById('pic#0').src =
             'https://images.unsplash.com/photo-1531686264889-56fdcabd163f?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y29uZ3JhdHVsYXRpb25zfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60';
           document.getElementById('pic#1').src =
@@ -187,8 +183,6 @@
         }
 
         if (occasion === 'other') {
-          document.getElementById('messageInput').placeholder = language === 'e' ?
-            'Write your message here...': 'תרשם/י מסר כאן';
           document.getElementById('pic#0').src =
             'https://images.unsplash.com/photo-1562776930-f2a2492c9c8f?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTN8fGxvdmUlMjB5b3V8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60';
           document.getElementById('pic#1').src =
@@ -255,14 +249,14 @@
     </script>
   </head>
   <body onload="loadFunction()">
-    <h2>Customize your Gift</h2>
+    <h2>התאם את המתנה שלך</h2>
     <div class="row">
       <div class="col-75">
         <div class="container">
           <form action="/action_page.php">
             <div class="row">
               <div class="col-50">
-                <h3 id="select">Please select a card</h3>
+                <h3 id="select">נא לבחור כרטיס</h3>
                 <div class="icon-container">
                   <img
                     onclick="selectPicture('pic#0')"
@@ -299,7 +293,7 @@
                     src=""
                   />
                 </div>
-                <h3 id="write">Please write a message</h3>
+                <h3 id="write">נא לרשום מסר</h3>
                 <input
                   type="text"
                   id="messageInput"
