@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="he">
+  <title>Gift Voucher Payment</title>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+
+    <style>
+      body {
+        font-family: Arial;
+        font-size: 17px;
+        padding: 8px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      .row {
+        display: -ms-flexbox; /* IE10 */
+        display: flex;
+        -ms-flex-wrap: wrap; /* IE10 */
+        flex-wrap: wrap;
+        margin: 0 -16px;
+      }
+
+      .col-25 {
+        -ms-flex: 25%; /* IE10 */
+        flex: 25%;
+      }
+
+      .col-50 {
+        -ms-flex: 50%; /* IE10 */
+        flex: 50%;
+      }
+
+      .col-75 {
+        -ms-flex: 75%; /* IE10 */
+        flex: 75%;
+      }
+
+      .col-25,
+      .col-50,
+      .col-75 {
+        padding: 0 16px;
+      }
+
+      .container {
+        background-color: #f2f2f2;
+        padding: 5px 20px 15px 20px;
+        border: 1px solid lightgrey;
+        border-radius: 3px;
+      }
+
+      input[type='text'] {
+        width: 100%;
+        margin-bottom: 20px;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+      }
+
+      label {
+        margin-bottom: 10px;
+        display: block;
+      }
+
+      .icon-container {
+        margin-bottom: 20px;
+        padding: 7px 0;
+        font-size: 24px;
+      }
+
+      .btn {
+        background-color: #04aa6d;
+        color: white;
+        padding: 12px;
+        margin: 10px 0;
+        border: none;
+        width: 100%;
+        border-radius: 3px;
+        cursor: pointer;
+        font-size: 17px;
+      }
+
+      .btn:hover {
+        background-color: #45a049;
+      }
+
+      a {
+        color: #2196f3;
+      }
+
+      hr {
+        border: 1px solid lightgrey;
+      }
+
+      span.price {
+        float: right;
+        color: grey;
+      }
+
+      /* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other (also change the direction - make the "cart" column go on top) */
+      @media (max-width: 800px) {
+        .row {
+          flex-direction: column-reverse;
+        }
+        .col-25 {
+          margin-bottom: 20px;
+        }
+      }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+      let urlParams;
+      let number;
+      let occasion;
+      let language;
+
+      function loadFunction() {
+        urlParams = new URLSearchParams(window.location.search);
+        number = urlParams.get('number');
+        occasion = urlParams.get('occasion');
+        language = urlParams.get('language');
+
+        if(language === 'h'){
+          document.getElementById('select') = 'נא לבחור כרטיס';
+          document.getElementById('write') = 'נא לרשום מסר';
+          document.getElementById('happy') = 'When you are happy with your card and message, please proceed to the payment.';
+          document.getElementById('after') = 'After payment, you will be redirected back to WhatsApp where you will receive the gift that can be sent.';
+          document.getElementById('payment') = 'Payment';
+          document.getElementById('cards') = 'Accepted Cards';
+          document.getElementById('name') = 'Name on Card';
+          document.getElementById('cardNumber') = 'Credit card number';
+          document.getElementById('expiryMonth') = 'Exp Month';
+          document.getElementById('expiryYear') = 'Exp Year';
+          document.getElementById('cvv') = 'CVV';
+          document.getElementById('myButton') = 'Pay Now';
+          document.getElementById('Cart') = "Cart"
+          document.getElementById('woolies') = "Woolworths"
+          document.getElementById('price') = "R200"
+          document.getElementById('total') = "Total"
+          document.getElementById('price-2') = 'R200'
+
+
+
+        }
+        if (occasion === 'birthday') {
+          document.getElementById('messageInput').placeholder = language === 'e' ?
+            'Happy Birthday!': 'יום הולדת שמח!';
+          document.getElementById('pic#0').src =
+            'https://images.unsplash.com/photo-1605104602628-4ef9ec5c1da4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=776&q=80';
+          document.getElementById('pic#1').src =
+            'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1740&q=80';
+          document.getElementById('pic#2').src =
+            'https://images.unsplash.com/photo-1513151233558-d860c5398176?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1740&q=80';
+          document.getElementById('pic#3').src =
+            'https://images.unsplash.com/photo-1558636508-e0db3814bd1d?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8aGFwcHklMjBiaXJ0aGRheXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60';
+        }
+
+        if (occasion === 'thank') {
+          document.getElementById('messageInput').placeholder = language === 'e' ? 'Thank you!': 'תודה רבה!';
+          document.getElementById('pic#0').src =
+            'https://images.unsplash.com/photo-1586810165511-781c734b6b0c?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjV8fHRoYW5rJTIweW91fGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60';
+          document.getElementById('pic#1').src =
+            'https://images.unsplash.com/photo-1557395120-d48fc38063d6?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fHRoYW5rJTIweW91fGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60';
+          document.getElementById('pic#2').src =
+            'https://images.unsplash.com/photo-1554830072-52d78d0d4c18?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8dGhhbmslMjB5b3V8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60';
+          document.getElementById('pic#3').src =
+            'https://images.unsplash.com/photo-1608389168343-ba8aa0cb3a63?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8dGhhbmslMjB5b3V8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60';
+        }
+
+        if (occasion === 'well') {
+          document.getElementById('messageInput').placeholder = language === 'e' ? 'Well Done!': 'כל הכבוד';
+          document.getElementById('pic#0').src =
+            'https://images.unsplash.com/photo-1531686264889-56fdcabd163f?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y29uZ3JhdHVsYXRpb25zfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60';
+          document.getElementById('pic#1').src =
+            'https://images.unsplash.com/photo-1527529482837-4698179dc6ce?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8d2VsbCUyMGRvbmV8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60';
+          document.getElementById('pic#2').src =
+            'https://images.unsplash.com/photo-1528191070801-d45063d66e17?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fHdlbGwlMjBkb25lfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60';
+          document.getElementById('pic#3').src =
+            'https://images.unsplash.com/photo-1503876466-1fc5143eda57?ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8dGhpbmtpbmclMjBvZiUyMHlvdXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60';
+        }
+
+        if (occasion === 'other') {
+          document.getElementById('messageInput').placeholder = language === 'e' ?
+            'Write your message here...': 'תרשם/י מסר כאן';
+          document.getElementById('pic#0').src =
+            'https://images.unsplash.com/photo-1562776930-f2a2492c9c8f?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTN8fGxvdmUlMjB5b3V8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60';
+          document.getElementById('pic#1').src =
+            'https://images.unsplash.com/photo-1513241435-32ad40a8577f?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8bG92ZSUyMHlvdXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60';
+          document.getElementById('pic#2').src =
+            'https://images.unsplash.com/photo-1594066521341-330a79387ec3?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8Y29uZ3JhdHVsYXRpb25zfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60';
+          document.getElementById('pic#3').src =
+            'https://images.unsplash.com/photo-1507652955-f3dcef5a3be5?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dGhpbmtpbmclMjBvZiUyMHlvdXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60';
+        }
+      }
+
+      let selectedPicture;
+      let picUrl;
+      function selectPicture(picId) {
+        if (selectedPicture) {
+          document.getElementById(selectedPicture).style =
+            'border: 1px solid #000000';
+        }
+        document.getElementById(picId).style = 'border: 10px solid #000000';
+        selectedPicture = picId;
+        picUrl = document.getElementById(picId).src;
+        console.log(picUrl);
+      }
+
+      async function postCall() {
+        console.log('called');
+
+        const url =
+          'https://99h7m0xonl.execute-api.eu-central-1.amazonaws.com/dev/flow/message';
+        const data = {
+          reference: '1514883137',
+          messageContext: 'gBGGJ3ImRHAPAglDLuZWS201DR8',
+          from: { number, name: 'payment page' },
+          to: { number: '0027746250000' },
+          message: {
+            text: language === 'e' ? 'e-paid': 'h-paid',
+            picUrl,
+            custom: {}
+          },
+          custom: {},
+          groupings: ['', '', ''],
+          time: new Date().toISOString(),
+          timeUtc: new Date().toUTCString(),
+          channel: 'WhatsApp'
+        };
+        console.log(data);
+        await fetch(url, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            Authorization: `eyJraWQiOiI4MFF6dlhRNVdYQ0tvdHJyM0tORnFlakxHVjVKOTVEbGU3S2lkQTNJV05nPSIsImFsZyI6IlJTMjU2In0.eyJhdF9oYXNoIjoiMmFPOGZyUURmbFh4bDBFb0RHcnpTUSIsInN1YiI6IjJmZGI2MzQ1LTUxY2MtNGJhYS05MDY5LWE2ZmM5OWFiZTkwZiIsImN1c3RvbTpPYmplY3RJRCI6IjM2OWVmOWI0LWFiNzAtNGIzMS04ODdjLTMxMDg2ZjRhYjM0MyIsImNvZ25pdG86Z3JvdXBzIjpbImV1LWNlbnRyYWwtMV9xdmt3UWsyQmpfT2ZmaWNlMzY1Il0sImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiaXNzIjoiaHR0cHM6XC9cL2NvZ25pdG8taWRwLmV1LWNlbnRyYWwtMS5hbWF6b25hd3MuY29tXC9ldS1jZW50cmFsLTFfcXZrd1FrMkJqIiwiY29nbml0bzp1c2VybmFtZSI6Ik9mZmljZTM2NV9mN215S053bVBDMldkZFZJSjFDY3ZHNXlaU1l2ZmJhNktFZDVvd2R1NC1RIiwibm9uY2UiOiJ3aWl3V09UVG1uVWp5b0t1dEIzTDRVbFpDYld1dlFSdjA3a2xRQl9HU2pNWks0V0Q1b3lDc3hRREhNNzNBSDg2bWdXYTF1VkVQaHlHTWVSanhaMnI0cnpkc1lFTnM1VXJtWTFjUkNQWXdGYTAyN1ZTb29GSmRVNzR6X2xYQW1kazlZdF9seU5DMGdwME5ua1RJZHBvb19nLU9MR1JfY1hDY3I0VHVwVFU3b3MiLCJhdWQiOiI2cW9pcWJsbWxlMmQxMXVvamNiYnF0MnRzciIsImlkZW50aXRpZXMiOlt7InVzZXJJZCI6ImY3bXlLTndtUEMyV2RkVklKMUNjdkc1eVpTWXZmYmE2S0VkNW93ZHU0LVEiLCJwcm92aWRlck5hbWUiOiJPZmZpY2UzNjUiLCJwcm92aWRlclR5cGUiOiJTQU1MIiwiaXNzdWVyIjoiaHR0cHM6XC9cL3N0cy53aW5kb3dzLm5ldFwvOWUzYjk4ZDYtOWQzZS00YzNmLWFjNjUtYTg2NWZiOGE0OTk0XC8iLCJwcmltYXJ5IjoidHJ1ZSIsImRhdGVDcmVhdGVkIjoiMTYyMTUxOTEyMjc0OCJ9XSwidG9rZW5fdXNlIjoiaWQiLCJhdXRoX3RpbWUiOjE2MjYyNjMyMjcsImV4cCI6MTYyNjI2NjgyNywiaWF0IjoxNjI2MjYzMjI3LCJlbWFpbCI6Im5vc2lAc3RlbGxyLW5ldC5jb20ifQ.TzIUXOXwK20R8oAAsXn5iCfMQi5aLmCDpGnao7tpYpq8OSCD9wYL6QjrV6npqn1JOEhouNguFZ-4_2SNVFrBQua5sF83VSHYjdowNm_b7qdc7qKUZl0-7qy8sW6XvBaKJXUSAf4ev68yUtEkl8e1FbEwra2kzP-nayZZQMW39ZA8EgqF7HbtzA1WHjqbqJIGQP_ossV8Sozg_pRKCNxHVxZF0ZEHTxGIYB52qyQgt9eK53s-B94j5AyG7INQVa2i2wC8ZieRiQ6HquYnvPz-C_jBXjs-TVy0J3nUnd6wVLkbHTt8ml8sMAHGcwR6Ad2qg_0iYXuGNlTyYC4W5YUtrA`
+          },
+          mode: 'no-cors',
+          body: JSON.stringify(data)
+        })
+          .then((data) => {
+            console.log('Success:', data);
+          })
+          .catch((error) => {
+            console.error('Error:', error);
+          });
+      }
+    </script>
+  </head>
+  <body onload="loadFunction()">
+    <h2>Customize your Gift</h2>
+    <div class="row">
+      <div class="col-75">
+        <div class="container">
+          <form action="/action_page.php">
+            <div class="row">
+              <div class="col-50">
+                <h3 id="select">Please select a card</h3>
+                <div class="icon-container">
+                  <img
+                    onclick="selectPicture('pic#0')"
+                    id="pic#0"
+                    style="border: 1px solid #000000"
+                    height="175px"
+                    width="175px"
+                    src=""
+                  />
+
+                  <img
+                    onclick="selectPicture('pic#1')"
+                    id="pic#1"
+                    style="border: 1px solid #000000"
+                    height="175px"
+                    width="175px"
+                    src=""
+                  />
+
+                  <img
+                    onclick="selectPicture('pic#2')"
+                    id="pic#2"
+                    style="border: 1px solid #000000"
+                    height="175px"
+                    width="175px"
+                    src=""
+                  />
+                  <img
+                    onclick="selectPicture('pic#3')"
+                    id="pic#3"
+                    style="border: 1px solid #000000"
+                    height="175px"
+                    width="175px"
+                    src=""
+                  />
+                </div>
+                <h3 id="write">Please write a message</h3>
+                <input
+                  type="text"
+                  id="messageInput"
+                  name="cardname"
+                  placeholder=""
+                />
+              </div>
+            </div>
+            <p>
+              <b id="happy"
+                >When you are happy with your card and message, please proceed
+                to the payment.</b
+              >
+            </p>
+            <p>
+              <i id="after"
+                >After payment, you will be redirected back to WhatsApp where
+                you will receive the gift that can be sent.</i
+              >
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <h2 id="payment">Payment</h2>
+    <div class="row">
+      <div class="col-75">
+        <div class="container">
+          <form>
+            <div style="padding-top: 15px" class="row">
+              <div class="col-50">
+                <label for="fname" id="cards">Accepted Cards</label>
+                <div class="icon-container">
+                  <i class="fa fa-cc-visa" style="color: navy"></i>
+                  <i class="fa fa-cc-amex" style="color: blue"></i>
+                  <i class="fa fa-cc-mastercard" style="color: red"></i>
+                  <i class="fa fa-cc-discover" style="color: orange"></i>
+                </div>
+                <label id="name" for="cname">Name on Card</label>
+                <input
+                  type="text"
+                  id="cname"
+                  name="cardName"
+                  placeholder="John More Doe"
+                />
+                <label id="cardNumber" for="ccnum">Credit card number</label>
+                <input
+                  type="text"
+                  id="ccnum"
+                  name="cardNumber"
+                  placeholder="1111-2222-3333-4444"
+                />
+                <label id="expiryMonth" for="expmonth">Exp Month</label>
+                <input
+                  type="text"
+                  id="expmonth"
+                  name="expmonth"
+                  placeholder="September"
+                />
+                <div class="row">
+                  <div class="col-50">
+                    <label id="expiryYear" for="expyear">Exp Year</label>
+                    <input
+                      type="text"
+                      id="expyear"
+                      name="expyear"
+                      placeholder="2018"
+                    />
+                  </div>
+                  <div class="col-50">
+                    <label id="cvv" for="cvv">CVV</label>
+                    <input type="text" id="cvv" name="cvv" placeholder="352" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+          <a href="https://wa.me/27746250000"
+            ><button class="btn" id="myButton" onclick="postCall()">
+              Pay Now
+            </button></a
+          >
+        </div>
+      </div>
+      <div class="col-25">
+        <div class="container">
+          <h4 id="Cart">
+            Cart
+            <span class="price" style="color: black"
+              ><i class="fa fa-shopping-cart"></i> <b>3</b></span
+            >
+          </h4>
+          <p>
+            <a id="woolies" href="#">Woolworths Voucher</a>
+            <span id="price" class="price">R200</span>
+          </p>
+          <hr />
+          <p id="total">
+            Total
+            <span class="price" style="color: black"
+              ><b id="price-2">R200</b></span
+            >
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
