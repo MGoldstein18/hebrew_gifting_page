@@ -271,17 +271,17 @@
                     src=""
                   />
                 </div>
-                <h3 id="write">נא לרשום מסר</h3>
+                <h3 id="write">רוצים לכתוב ברכה?</h3>
                 <input
                   type="text"
                   id="messageInput"
                   name="cardname"
-                  placeholder=""
+                  placeholder="כתבו כאן"
                 />
               </div>
             </div>
             <p>
-              <b id="happy"> מרוצה מהכרטיס ומסר שלך? נא להמשיך לתשלום</b>
+              <b id="happy"> מרוצה מהכרטיס וברכה שלך? נא להמשיך לתשלום</b>
             </p>
             <p>
               <i id="after"
@@ -301,7 +301,7 @@
           <form>
             <div style="padding-top: 15px" class="row">
               <div class="col-50">
-                <label for="fname" id="cards">כרטיסים מקןבלים</label>
+                <label for="fname" id="cards">כרטיסים מקובלים</label>
                 <div class="icon-container">
                   <i class="fa fa-cc-visa" style="color: navy"></i>
                   <i class="fa fa-cc-amex" style="color: blue"></i>
@@ -322,25 +322,15 @@
                   name="cardNumber"
                   placeholder="1111-2222-3333-4444"
                 />
-                <label id="expiryMonth" for="expmonth">חודש תפוגה</label>
+                <label id="expiryMonth" for="expmonth">תוקף</label>
                 <input
                   type="text"
                   id="expmonth"
                   name="expmonth"
-                  placeholder="08"
+                  placeholder="08/23"
                 />
-                <div class="row">
                   <div class="col-50">
-                    <label id="expiryYear" for="expyear">שנת תפוגה</label>
-                    <input
-                      type="text"
-                      id="expyear"
-                      name="expyear"
-                      placeholder="23"
-                    />
-                  </div>
-                  <div class="col-50">
-                    <label id="cvv" for="cvv">קוד אבטחה</label>
+                    <label id="cvv" for="cvv">CVV</label>
                     <input type="text" id="cvv" name="cvv" placeholder="352" />
                   </div>
                 </div>
@@ -349,7 +339,7 @@
           </form>
           <a href="https://wa.me/27746250000"
             ><button class="btn" id="myButton" onclick="postCall()">
-              שלם
+              לתשלום
             </button></a
           >
         </div>
